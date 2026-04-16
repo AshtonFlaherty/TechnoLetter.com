@@ -212,16 +212,16 @@
         
         <div class="track-column">
             <div class="track-container">
-                <h3>Techno: Cristian Varela - Fascinator (Original Mix)</h3>
+                <h3>Techno: Cristian Varela - Your Body Experience</h3>
                 <div class="track-row">
-                    <iframe width="420" height="236" src="https://www.youtube.com/watch?v=2TG2mAe2Tto" allowfullscreen></iframe>
+                    <iframe width="420" height="236" src="https://www.youtube.com/embed/i-R7UGKZ6XY" allowfullscreen></iframe>
                     <div class="zine-data">
-                        <p style="font-weight: bold; text-transform: uppercase; color: #fff;">> SYS_REQ: TECHNO_01</p>
-                        <p>> BPM: 138<br>
-                        > HARDWARE_DIAGNOSTIC: KORG MS-20<br>
+                        <p style="font-weight: bold; text-transform: uppercase; color: #fff;">> SYS_REQ: TECHNO_01 [2001_ARCHIVE]</p>
+                        <p>> BPM: 136<br>
+                        > HARDWARE_DIAGNOSTIC: ANALOG_SEQUENCER<br>
                         > PATCH_BAY_STATUS: ROUTED TO VCA IN<br>
-                        > BEHRINGER_CRAVE_SEQ: LOADED...<br>
-                        > SIGNAL: <span class="terminal-highlight">ACTIVE</span></p>
+                        > BEHRINGER_CRAVE_SEQ: READY...<br>
+                        > SIGNAL: <span class="terminal-highlight">STABLE</span></p>
                     </div>
                 </div>
             </div>
@@ -311,75 +311,52 @@
                     <tbody>
                         <tr>
                             <td style="color: #00ff00;">01</td>
-                            <td style="padding-right: 20px;">
-                                Azari & III - Hungry for power (Jamie Jones Remix)
-                            </td>
+                            <td style="padding-right: 20px;">Azari & III - Hungry for power (Jamie Jones Remix)</td>
                             <td style="text-align: right;">124</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">02</td>
-                            <td style="padding-right: 20px;">
-                                The Martian - Stardancer<br>
-                                <span class="tag-test-press">[ CLASSIC ]</span>
-                            </td>
+                            <td style="padding-right: 20px;">The Martian - Stardancer<br><span class="tag-test-press">[ CLASSIC ]</span></td>
                             <td style="text-align: right;">135</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">03</td>
-                            <td style="padding-right: 20px;">
-                                Dj Rolando - Knights of the Jaguar
-                            </td>
+                            <td style="padding-right: 20px;">Dj Rolando - Knights of the Jaguar</td>
                             <td style="text-align: right;">138</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">04</td>
-                            <td style="padding-right: 20px;">
-                                Reboot - Caminando (with Lyrics)
-                            </td>
+                            <td style="padding-right: 20px;">Reboot - Caminando (with Lyrics)</td>
                             <td style="text-align: right;">126</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">05</td>
-                            <td style="padding-right: 20px;">
-                                Acida Dominga - Lost Highways<br>
-                                <span class="tag-white-label">[ WHITE LABEL ]</span>
-                            </td>
+                            <td style="padding-right: 20px;">Acida Dominga - Lost Highways<br><span class="tag-white-label">[ WHITE LABEL ]</span></td>
                             <td style="text-align: right;">130</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">06</td>
-                            <td style="padding-right: 20px;">
-                                Agoria - Dust (official)
-                            </td>
+                            <td style="padding-right: 20px;">Agoria - Dust (official)</td>
                             <td style="text-align: right;">120</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">07</td>
-                            <td style="padding-right: 20px;">
-                                Alex Reece & Stewart Reece & Oscar Reece - Candles
-                            </td>
+                            <td style="padding-right: 20px;">Alex Reece & Stewart Reece & Oscar Reece - Candles</td>
                             <td style="text-align: right;">160</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">08</td>
-                            <td style="padding-right: 20px;">
-                                Lexinous - Mechanisms
-                            </td>
+                            <td style="padding-right: 20px;">Lexinous - Mechanisms</td>
                             <td style="text-align: right;">174</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">09</td>
-                            <td style="padding-right: 20px;">
-                                DJ SS - The Lighter (ORIGINAL)<br>
-                                <span class="tag-test-press">[ CLASSIC ]</span>
-                            </td>
+                            <td style="padding-right: 20px;">DJ SS - The Lighter (ORIGINAL)<br><span class="tag-test-press">[ CLASSIC ]</span></td>
                             <td style="text-align: right;">165</td>
                         </tr>
                         <tr>
                             <td style="color: #00ff00;">10</td>
-                            <td style="padding-right: 20px;">
-                                Laurent Garnier - The Hoe (Old School Mix)
-                            </td>
+                            <td style="padding-right: 20px;">Laurent Garnier - The Hoe (Old School Mix)</td>
                             <td style="text-align: right;">128</td>
                         </tr>
                     </tbody>
@@ -451,21 +428,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Using a free public API to grab MixMag's RSS feed and turn it into JSON
             const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmixmag.net%2Frss.xml';
             
             fetch(rssUrl)
                 .then(response => response.json())
                 .then(data => {
                     const feedContainer = document.getElementById('live-feed-content');
-                    feedContainer.innerHTML = ''; // Clears the "Establishing connection" text
+                    feedContainer.innerHTML = '';
                     
                     if (data.status === 'ok') {
-                        // Grab the 4 most recent articles
                         const items = data.items.slice(0, 4);
                         
                         items.forEach(item => {
-                            // Format the date to look like [04.16.26]
                             const pubDate = new Date(item.pubDate);
                             const formattedDate = `[${String(pubDate.getMonth() + 1).padStart(2, '0')}.${String(pubDate.getDate()).padStart(2, '0')}.${String(pubDate.getFullYear()).slice(-2)}]`;
                             
@@ -482,7 +456,6 @@
                     }
                 })
                 .catch(error => {
-                    // Fallback terminal error if the feed is down
                     document.getElementById('live-feed-content').innerHTML = `
                         <div class="news-item" style="color: #ff3333;">
                             <span class="news-date">[ERR_CODE: 404]</span>
