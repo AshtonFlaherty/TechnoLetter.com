@@ -265,23 +265,35 @@
                 > MK2_INPUT: DETECTED
             </div>
 
-            <div style="border: 1px solid rgba(0, 255, 0, 0.2); background: rgba(0, 255, 0, 0.05); padding: 15px; font-size: 11px; line-height: 1.4; color: #00ff00; font-family: 'Courier New', monospace;">
-                <span style="background: #00ff00; color: #000; padding: 0 3px; font-weight: bold;">[STUDIO_PATH_v1]</span>
-                <br><br>
-                TD-3 / CRAVE<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;| (Analog Audio)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;V<br>
-                ARTURIA MkII<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;| (Summed Stereo)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;V<br>
-                TASCAM US-4x4<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;| (A/D Conversion)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;V<br>
-                FL STUDIO [HOST]<br><br>
-                STATUS: <span class="blinking-cursor">STREAMING...</span>
-            </div>
-        </div>
-    </div>
+            <div style="border: 1px solid rgba(0, 255, 0, 0.2); background: rgba(0, 255, 0, 0.05); padding: 15px; font-size: 11px; line-height: 1.2; color: #00ff00; font-family: 'Courier New', monospace; white-space: pre;">
+<span style="background: #00ff00; color: #000; padding: 0 3px; font-weight: bold;">[STUDIO_PATH_v1.2]</span>
+__________________________________________
+|                                        |
+| +----------+          +------------+   |
+| |   TD-3   |          |    CRAVE   |   |
+| +----------+          +------------+   |
+|      |                      |          |
+|      | [Analog Mono]        | [Mono]   |
+|      +----------+-----------+          |
+|                 V                      |
+|         +----------------+             |
+|         |  ARTURIA MkII  |             |
+|         +----------------+             |
+|                 |                      |
+|                 | [Summed Stereo]      |
+|                 V                      |
+|         +----------------+             |
+|         |  TASCAM US-4x4 |             |
+|         +----------------+             |
+|                 |                      |
+|                 | [USB/ASIO]           |
+|                 V                      |
+|         +----------------+             |
+|         | FL STUDIO HOST |             |
+|         +----------------+             |
+|                                        |
+| STATUS: <span class="blinking-cursor">STREAMING...</span> [##########] 100% |
+|________________________________________|</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
