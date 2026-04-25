@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Teardowns // TechnoLetter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesque:wght@400;500&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* [ GLOBAL STYLES ] */
+        body {
+            background: radial-gradient(circle at center, #1a1f2b 0%, #10141d 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Space Grotesque', sans-serif;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        .scanlines {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 3px 100%;
+            z-index: 9999; pointer-events: none;
+        }
+        h1, h2, h3 {
+            font-family: 'Archivo Black', sans-serif; text-transform: uppercase; line-height: 1; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #ffffff 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 0;
+        }
+        h1 { font-size: 3.2em; letter-spacing: -3px; margin: 40px 0; transition: all 0.2s; }
+        
+        .nav-link {
+            font-family: 'Courier New', monospace; color: #00ff00; text-decoration: none; border-bottom: 1px dashed #00ff00; font-size: 14px;
+        }
+        .nav-link:hover { background: rgba(0, 255, 0, 0.1); }
+
+        /* [ SLIM AUDIO PLAYER ] */
+        .slim-player-container {
+            width: 100%;
+            max-width: 600px;
+            height: 56px; 
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            background: #000;
+        }
+        .slim-player-container iframe {
+            width: 100%;
+            height: 120px; 
+            margin-top: -64px; 
+            border: none;
+        }
+
+        /* [ TRACK TEARDOWN STYLES ] */
+        .teardown-container {
+            border: 1px solid #333; background: rgba(16, 20, 29, 0.8); margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); border-left: 4px solid #00e1ff; max-width: 1000px;
+        }
+        /* Color variations for genres */
+        .border-techno { border-left-color: #00e1ff; }
+        .border-house { border-left-color: #ffaa00; }
+        .border-dnb { border-left-color: #ff3333; }
+
+        .teardown-header {
+            background: rgba(0, 225, 255, 0.05); padding: 20px 30px; border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+            display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px;
+        }
+        .bg-techno { background: rgba(0, 225, 255, 0.05); }
+        .bg-house { background: rgba(255, 170, 0, 0.05); }
+        .bg-dnb { background: rgba(255, 51, 51, 0.05); }
+
+        .teardown-title { font-size: 2em; color: #fff; margin: 0; letter-spacing: -2px; }
+        
+        .teardown-meta { font-family: 'Courier New', monospace; font-size: 0.9em; font-weight: bold; }
+        .text-techno { color: #00e1ff; }
+        .text-house { color: #ffaa00; }
+        .text-dnb { color: #ff3333; }
+
+        .teardown-body { padding: 30px; display: flex; gap: 40px; flex-wrap: wrap; }
+        .teardown-text { flex: 2; min-width: 300px; }
+        .teardown-sidebar { flex: 1; min-width: 250px; border-left: 1px dotted rgba(255, 255, 255, 0.2); padding-left: 30px; }
+        .teardown-h4 {
+            color: #00ff00; font-family: 'Courier New', monospace; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px;
+            text-transform: uppercase; background: rgba(0, 255, 0, 0.1); display: inline-block; padding: 2px 8px;
+        }
+        .teardown-text p { font-size: 1.05rem; line-height: 1.8; color: #cbd5e1; margin-bottom: 30px; }
+        
+        .spec-box { background: rgba(0, 0, 0, 0.6); border: 1px solid #333; padding: 20px; font-family: 'Courier New', monospace; font-size: 0.9em; color: #9ba4b5; line-height: 2; }
+        .spec-box span { color: #fff; font-weight: bold; }
+
+        /* [ BBS GUESTBOOK ] */
+        .bbs-container {
+            border: 1px solid #00ff00; background: rgba(0, 255, 0, 0.05); padding: 20px; max-width: 1000px; font-family: 'Courier New', monospace; margin-top: 40px; margin-bottom: 100px;
+        }
+        .bbs-header { color: #00ff00; border-bottom: 1px dashed #00ff00; padding-bottom: 10px; margin-bottom: 20px; font-weight: bold; }
+        .bbs-post { border-bottom: 1px dotted rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 15px; }
+        .bbs-meta { color: #9ba4b5; font-size: 0.85em; margin-bottom: 5px; }
+        .bbs-author { color: #fff; font-weight: bold; }
+        .bbs-text { color: #cbd5e1; font-size: 0.95em; }
+        .bbs-input-area { margin-top: 20px; border-top: 1px dashed rgba(0,255,0,0.3); padding-top: 20px; }
+        .bbs-input { background: #000; border: 1px solid #333; color: #00ff00; font-family: 'Courier New', monospace; padding: 8px; width: 100%; box-sizing: border-box; margin-bottom: 10px; }
+        .bbs-input:focus { outline: none; border-color: #00ff00; }
+        .bbs-btn { background: #00ff00; color: #000; border: none; padding: 8px 15px; font-weight: bold; font-family: 'Courier New', monospace; cursor: pointer; transition: all 0.2s; }
+        .bbs-btn:hover { background: #fff; }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); text-shadow: none; }
+            20% { transform: skew(-5deg); text-shadow: -2px 0 #ff003c, 2px 0 #00e1ff; }
+            40% { transform: skew(5deg); text-shadow: 2px 0 #ff003c, -2px 0 #00e1ff; }
+            60% { transform: skew(0deg); text-shadow: none; }
+            100% { transform: skew(0deg); text-shadow: none; }
+        }
+        .glitch-hover:hover { animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; -webkit-text-fill-color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div>
+
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <a href="index.html" class="nav-link"><< RETURN_TO_ROOT</a>
+        
+        <h1 class="glitch-hover">TRANSMISSIONS // FILE READOUT</h1>
+        <p>Studio notes, mixdown analysis, and essential track teardowns across the circuit.</p>
+        
+        <hr style="border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0 50px 0;">
+
+        <div class="teardown-container border-techno">
+            <div class="teardown-header bg-techno">
+                <div>
+                    <div style="color: #9ba4b5; font-family: 'Courier New', monospace; font-size: 0.85em; margin-bottom: 5px;">>> SYS_LOG: TECHNO_ARCHIVE // 001</div>
+                    <h2 class="teardown-title" style="background: none; -webkit-text-fill-color: white;">Cristian Varela - Your Body Experience</h2>
+                </div>
+                <div class="teardown-meta text-techno">[ MOUNTING ANALOG_MASTER ]</div>
+            </div>
+            
+            <div class="teardown-body">
+                <div class="teardown-text">
+                    <div class="slim-player-container">
+                        <iframe src="https://www.youtube.com/embed/i-R7UGKZ6XY?controls=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <h4 class="teardown-h4">>> THE VIBE // PIONEER_STATUS</h4>
+                    <p>Cristian Varela is single-handedly one of the biggest underground pioneers of techno music in the late 90's into the early 2000's. Cristian continues to be more than a titan in the Dance music scene, having set the standard for today's music overall. From his heavy analog cuts released in 2003 to "Fascinator" released in 2010, Cristian never fails to keep the dance floor moving.</p>
+                    
+                    <h4 class="teardown-h4">>> DEPLOYMENT // LIVE_CRAFT</h4>
+                    <p>With his impressive vinyl skills, constantly DJing vinyl-only sets—commonly with 4+ turntables—he is truly one of the biggest definitions of "setting the standard" with both DJing AND Producing.</p>
+                </div>
+                
+                <div class="teardown-sidebar">
+                    <div class="spec-box">
+                        <span>> LABEL:</span> Elephanthaus<br>
+                        <span>> YEAR:</span> 2003<br>
+                        <span>> FORMAT:</span> 12" Vinyl<br>
+                        <span>> BPM:</span> 136<br>
+                        <br>
+                        <span class="text-techno" style="border-top: 1px dashed #333; padding-top: 10px; display: block;">[ STATUS: ESSENTIAL ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="teardown-container border-house">
+            <div class="teardown-header bg-house">
+                <div>
+                    <div style="color: #9ba4b5; font-family: 'Courier New', monospace; font-size: 0.85em; margin-bottom: 5px;">>> SYS_LOG: HOUSE_ARCHIVE // 002</div>
+                    <h2 class="teardown-title" style="background: none; -webkit-text-fill-color: white;">Terry Hunter - Wonderful (Club Mix)</h2>
+                </div>
+                <div class="teardown-meta text-house">[ MOUNTING GOSPEL_HOUSE ]</div>
+            </div>
+            
+            <div class="teardown-body">
+                <div class="teardown-text">
+                    <div class="slim-player-container">
+                        <iframe src="https://www.youtube.com/embed/M5Anbw1Kq1E?controls=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <h4 class="teardown-h4">>> THE VIBE // SOULFUL_GROOVE</h4>
+                    <p>Terry Hunter is another absolute powerhouse in the dance music scene. The Chicago-based producer is often referred to as "the legendary" for his deep roots and massive influence in this genre.</p>
+                    <p>Clocking around 122-125bpm, it is widely celebrated and seen as embodying pure "Gospel-House" energy, blending spiritual lyrics with a driving, soulful dance floor groove. This song is notably cited as an instant classic that remains a peak time favorite in soulful house sets around the world.</p>
+                </div>
+                
+                <div class="teardown-sidebar">
+                    <div class="spec-box">
+                        <span>> LABEL:</span> Soul Heaven Records<br>
+                        <span>> CAT_NO:</span> SHR014<br>
+                        <span>> YEAR:</span> 2007<br>
+                        <span>> FORMAT:</span> 12" Vinyl<br>
+                        <span>> BPM:</span> 122<br>
+                        <br>
+                        <span class="text-house" style="border-top: 1px dashed #333; padding-top: 10px; display: block;">[ STATUS: CLASSIC ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="teardown-container border-dnb">
+            <div class="teardown-header bg-dnb">
+                <div>
+                    <div style="color: #9ba4b5; font-family: 'Courier New', monospace; font-size: 0.85em; margin-bottom: 5px;">>> SYS_LOG: DNB_ARCHIVE // 003</div>
+                    <h2 class="teardown-title" style="background: none; -webkit-text-fill-color: white;">Sade - Like A Tattoo (Skeps's Edit)</h2>
+                </div>
+                <div class="teardown-meta text-dnb">[ MOUNTING WHITE_LABEL ]</div>
+            </div>
+            
+            <div class="teardown-body">
+                <div class="teardown-text">
+                    <div class="slim-player-container">
+                        <iframe src="https://www.youtube.com/embed/8b4Zf84528s?controls=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <h4 class="teardown-h4">>> THE VIBE // AMEN_CONTRAST</h4>
+                    <p>Easily a personal favorite, this 2021 atmospheric Jungle bootleg is a masterclass in contrast. It pairs Sade’s haunting, minimalist delivery with frantic breakbeats without losing its ethereal soul.</p>
+                    <p>It might be a modern release, but it carries the unmistakable DNA of a 90s Jungle classic.</p>
+                </div>
+                
+                <div class="teardown-sidebar">
+                    <div class="spec-box">
+                        <span>> LABEL:</span> White Label<br>
+                        <span>> YEAR:</span> 2021<br>
+                        <span>> FORMAT:</span> Digital Bootleg<br>
+                        <span>> BPM:</span> 174<br>
+                        <br>
+                        <span class="text-dnb" style="border-top: 1px dashed #333; padding-top: 10px; display: block;">[ STATUS: HEAVY ROTATION ]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bbs-container">
+            <div class="bbs-header">>> ESTABLISHING P2P CONNECTION... // GUEST_LOG_ACTIVE</div>
+            
+            <div id="bbs-feed">
+                <div class="bbs-post">
+                    <div class="bbs-meta">[2026.04.25 - 14:22:01] <span class="bbs-author">@SysAdmin</span></div>
+                    <div class="bbs-text">Welcome to the Transmissions terminal. Drop a log, leave an ID, or critique the mixdowns. Secure connection established.</div>
+                </div>
+            </div>
+
+            <div class="bbs-input-area">
+                <input type="text" class="bbs-input" placeholder="> ENTER_HANDLE..." style="max-width: 250px;"><br>
+                <textarea class="bbs-input" placeholder="> TRANSMIT_MESSAGE..." rows="3"></textarea><br>
+                <button class="bbs-btn">> SUBMIT_PACKET</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
