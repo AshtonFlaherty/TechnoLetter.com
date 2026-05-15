@@ -12,6 +12,7 @@
             font-family: 'Space Grotesque', sans-serif;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
+            padding-bottom: 120px; /* Space for the fixed player */
         }
 
         /* CRT Scanlines Overlay */
@@ -78,6 +79,10 @@
         .news-item a { color: #fff; text-decoration: none; border-bottom: 1px dotted #555; }
         .news-item a:hover { color: #00ff00; background: rgba(0, 255, 0, 0.1); }
         .news-date { color: #00ff00; font-weight: bold; }
+        
+        /* Forces RSS feed links to be hacker green */
+        #live-feed-content a { color: #00ff00 !important; border-bottom: 1px dotted #00ff00; text-decoration: none; transition: all 0.2s; }
+        #live-feed-content a:hover { background: rgba(0, 255, 0, 0.1); text-shadow: 0 0 5px #00ff00; }
 
         .chart-container { border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.6); padding: 20px; font-family: 'Courier New', monospace; backdrop-filter: blur(3px); }
         .chart-header { color: #00ff00; border-bottom: 2px dashed #00ff00; padding-bottom: 10px; margin-bottom: 15px; }
@@ -97,6 +102,74 @@
             100% { transform: skew(0deg); text-shadow: none; }
         }
         .glitch-hover:hover { animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite; -webkit-text-fill-color: #fff; }
+
+        /* --- PERSISTENT AUDIO MODULE STYLES --- */
+        #terminal-audio-module {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 320px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #00ff00;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            z-index: 10001;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+        }
+
+        .audio-header {
+            color: #00ff00;
+            font-size: 11px;
+            border-bottom: 1px dashed rgba(0, 255, 0, 0.3);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #track-display {
+            font-size: 13px;
+            color: #fff;
+            margin-bottom: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .audio-btn {
+            background: #000;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: all 0.2s;
+        }
+
+        .audio-btn:hover {
+            background: #00ff00;
+            color: #000;
+        }
+
+        #progress-container {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 12px;
+        }
+
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #00ff00;
+        }
     </style>
 </head>
 <body>
@@ -119,39 +192,39 @@
         <div class="track-column">
             
             <div class="track-container track-box badge-techno">
-                <h3>Techno: Cristian Varela - Your Body Experience</h3>
+                <h3>Techno: Tomaz & Filterheadz - Sunshine</h3>
                 <div class="track-row">
-                    <iframe width="420" height="236" src="https://www.youtube.com/embed/i-R7UGKZ6XY" allowfullscreen></iframe>
+                    <iframe width="420" height="236" src="https://www.youtube.com/embed/h3fwgLAIqds" allowfullscreen></iframe>
                     <div class="zine-data">
-                        <p style="font-weight: bold; color: #fff;">> SYS_REQ: TECHNO_01 [2001_ARCHIVE]</p>
-                        <p>> BPM: 136<br>
-                        > SOURCE: ANALOG_SEQUENCER<br>
-                        > SIGNAL: <span class="terminal-highlight">STABLE</span></p>
+                        <p style="font-weight: bold; color: #fff;">> SYS_REQ: TECHNO_02 [2002_ARCHIVE]</p>
+                        <p>> BPM: 135<br>
+                        > SOURCE: TRIBAL_GROOVE<br>
+                        > SIGNAL: <span class="terminal-highlight">PEAK_TIME</span></p>
                     </div>
                 </div>
             </div>
 
             <div class="track-container track-box badge-house">
-                <h3>House: Terry Hunter - Wonderful (Club Mix)</h3>
+                <h3>House: Josh Baker - Handle This</h3>
                 <div class="track-row">
-                    <iframe width="420" height="236" src="https://www.youtube.com/embed/M5Anbw1Kq1E" allowfullscreen></iframe>
+                    <iframe width="420" height="236" src="https://www.youtube.com/embed/ehg0HeK2EkY" allowfullscreen></iframe>
                     <div class="zine-data">
                         <p style="font-weight: bold; color: #fff;">[ STUDIO LOG // RAVE DATA ]</p>
-                        <p>BPM: 122<br>
-                        NOTES: Add swing to Roland T-8 hats. Map Mk2 rotary to filters.</p>
+                        <p>BPM: 128<br>
+                        NOTES: Deep bassline sequence. Modulate filter cutoff on the drop. Pure minimal house energy.</p>
                     </div>
                 </div>
             </div>
 
             <div class="track-container track-box badge-dnb">
-                <h3>DnB: Sade - Like A Tattoo (Skeps's Jungle Edit)</h3>
+                <h3>Jungle: New Blood - Worries In The Dance</h3>
                 <div class="track-row">
-                    <iframe width="420" height="236" src="https://www.youtube.com/embed/8b4Zf84528s" allowfullscreen></iframe>
+                    <iframe width="420" height="236" src="https://www.youtube.com/embed/Q95XYqiGnGw" allowfullscreen></iframe>
                     <div class="zine-data">
-                        <p style="font-weight: bold; color: #fff;">AMEN_BREAK_CHOP_v4.als</p>
-                        <p>> BPM: 174<br>
-                        > ACID: BEHRINGER TD-3<br>
-                        > RESONANCE: <strong>MAX</strong></p>
+                        <p style="font-weight: bold; color: #fff;">AMEN_BREAK_CHOP_v5.als</p>
+                        <p>> BPM: 165<br>
+                        > SAMPLER: AKAI S950<br>
+                        > RESONANCE: <strong>HEAVY</strong></p>
                         
                         <div class="amen-chop-grid">
                             <div class="chop-header">>> TRANSIENT_MAP // ARTURIA_MK2_PADS</div>
@@ -197,7 +270,7 @@ PAD_5 [GHOST] ▄▄...........
 ~!~!!!!~~ .:XW$$$U!!?$$$$$$RMM!
 !:~~~ .:!M"T#$$$$WX??#MRRMMM!
 ~?WuxiW*`   `"#$$$$8!!!!??!!!
-:X- M$$$$       `"T#$T~!8$WUXU~
+:X- M$$$$        `"T#$T~!8$WUXU~
 :%`  ~#$$$m:        ~!~ ?$$$$$$
 :!`.-   ~T$$$$8xx.  .xWW- ~""##*"
 .....   -~~:<` !HUW8MMUUH!!!
@@ -327,7 +400,7 @@ PAD_5 [GHOST] ▄▄...........
 __________________________________________
 |                                        |
 | +----------+          +------------+   |
-| |   TD-3   |          |    CRAVE   |   |
+| |  TD-3    |          |   CRAVE    |   |
 | +----------+          +------------+   |
 |      |                     |           |
 |      | [Analog Mono]       | [Mono]    |
@@ -346,7 +419,7 @@ __________________________________________
 |                 | [USB/ASIO]           |
 |                 V                      |
 |         +----------------+             |
-|         | DELL G15 5525  |             |
+|         |  LENOVO 81SQ   |             |
 |         | FL STUDIO HOST |             |
 |         +----------------+             |
 |                                        |
@@ -355,7 +428,25 @@ __________________________________________
         </div>
     </div> 
 
+    <div id="terminal-audio-module">
+        <div class="audio-header">
+            <span>>> AUDIO_UPLINK_0.1</span>
+            <span class="blinking-cursor">_</span>
+        </div>
+        <div id="track-display">LOAD_SYSTEM_PLAYLIST...</div>
+        <div class="audio-controls">
+            <button class="audio-btn" onclick="prevTrack()">PREV</button>
+            <button class="audio-btn" id="play-pause-btn" onclick="togglePlay()">PLAY</button>
+            <button class="audio-btn" onclick="nextTrack()">NEXT</button>
+        </div>
+        <div id="progress-container">
+            <div id="progress-fill"></div>
+        </div>
+        <audio id="bg-audio-element"></audio>
+    </div>
+
     <script>
+        // --- MIXMAG RSS FEED SCRIPT ---
         document.addEventListener('DOMContentLoaded', function() {
             const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmixmag.net%2Frss.xml';
             fetch(rssUrl).then(res => res.json()).then(data => {
@@ -365,13 +456,78 @@ __________________________________________
                     data.items.slice(0, 4).forEach(item => {
                         const d = new Date(item.pubDate);
                         const f = `[${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}.${String(d.getFullYear()).slice(-2)}]`;
-                        feed.innerHTML += `<div style="margin-bottom:15px;"><span class="news-date">${f}</span><br><strong><a href="${item.link}" target="_blank">>> ${item.title}</a></strong></div>`;
+                        feed.innerHTML += `<div class="news-item" style="margin-bottom:15px;"><span class="news-date">${f}</span><br><strong><a href="${item.link}" target="_blank">>> ${item.title}</a></strong></div>`;
                     });
                 }
             }).catch(e => {
                 document.getElementById('live-feed-content').innerHTML = '<div style="color:#ff3333;">> PACKET LOSS. REMOTE FEED UNREACHABLE.</div>';
             });
         });
+
+        // --- PLAYLIST LOGIC SCRIPT ---
+        // Ensure your MP3 files are in a folder named 'music' relative to this HTML file
+        const playlist = [
+    { title: "Agoria - We Were Little", url: "music/agoria_little.wav" },
+    { title: "Agoria - Dust", url: "music/agoria_dust.wav" },
+    { title: "Reinier Zonneveld & Axan - Solid Block", url: "music/reinier_axan.mp3" },
+    { title: "Amy Winehouse - Valerie (Remix)", url: "music/winehouse_remix.wav" },
+    { title: "Rodriguez Jr. - Kenopsia", url: "music/rodriguez_kenopsia.wav" },
+    { title: "NRG - Helpless", url: "music/nrg_helpless.wav" },
+    { title: "Blauert - Aspiration", url: "music/blauert_aspiration.wav" },
+    { title: "Nick Beringer - Time Shift", url: "music/beringer_timeshift.wav" }
+
+        ];
+
+        let currentTrackIdx = 0;
+        const audio = document.getElementById('bg-audio-element');
+        const trackDisplay = document.getElementById('track-display');
+        const playBtn = document.getElementById('play-pause-btn');
+        const progressFill = document.getElementById('progress-fill');
+
+        function loadTrack(index) {
+            const track = playlist[index];
+            audio.src = track.url;
+            trackDisplay.innerText = `> PLAYING: ${track.title}`;
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().catch(e => {
+                    trackDisplay.innerText = "> ERROR: INTERACT_REQ";
+                });
+                playBtn.innerText = "PAUSE";
+            } else {
+                audio.pause();
+                playBtn.innerText = "PLAY";
+            }
+        }
+
+        function nextTrack() {
+            currentTrackIdx = (currentTrackIdx + 1) % playlist.length;
+            loadTrack(currentTrackIdx);
+            audio.play();
+            playBtn.innerText = "PAUSE";
+        }
+
+        function prevTrack() {
+            currentTrackIdx = (currentTrackIdx - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrackIdx);
+            audio.play();
+            playBtn.innerText = "PAUSE";
+        }
+
+        // Auto-advance
+        audio.onended = nextTrack;
+
+        // Progress bar update
+        audio.ontimeupdate = () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + "%";
+        };
+
+        // Initialize first track
+        loadTrack(currentTrackIdx);
+
     </script>
 </body>
 </html>
